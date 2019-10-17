@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+  <body>
+      <style>
+      body > div {
+        margin: 10px;
+        border: 1px solid black;
+        padding: 10px;
+      }
+      pre {
+        margin: 5px 0;
+        color: blue;
+      }
+      .counter {
+        display: none;
+        /* color: transparent;
+        height: 0; */
+        /* margin: 5px 0; */
+      }
+    </style>
+    <div>
+      <div class="title">Watching child_list change on div (subtree:false)</div>
+      <pre></pre>
+      <div class="counter"></div>
+      <div style="color:green"></div>
+    </div>
+
+    <div>
+      <div class="title">Watching child_list change on div (subtree:<span style="color:red">false</span>)</div>
+      <pre></pre>
+      <div class="counter"><span></span></div>
+      <div style="color:red">the callback is not called on change because the change appears in the subtree of one child of div and subree is set to false</div>
+    </div>
+
+    <div>
+      <div class="title">Watching child_list change on div (subtree:<span style="color:green">true</span>)</div>
+      <pre></pre>
+      <div class="counter"><span></span></div>
+      <div style="color:green"></div>
+      <div style="color:green">but here it works because subtree is set to true</div>
+    </div>
+
+    <script type="module" src="element-observer.js"></script>
+    <script>
+      window.onload = async () => {
+        const counters = document.querySelectorAll('.counter')
+
+        /* first counter */
+        const firstCounter = counters[0]
+        firstCounter.previousElementSibling.textContent = '<div>0</div>'
+        firstCounter.textContent = 0
+        ElementObserver.observe(firstCounter, (mutations, element) => {
+          element.nextElementSibling.textContent = `callback : element value changed to "${element.textContent}"`
+        })
+        setInterval(() => {
+          firstCounter.textContent = parseInt(firstCounter.textContent) + 1
+          firstCounter.previousElementSibling.textContent = `<div>${firstCounter.textContent}</div>`
+        }, 1000)
+
+        // await new Promise(resolve => setTimeout(resolve, 1000))
+
+        /* second counter */
+        const secondCounter = counters[1]
+        secondCounter.previousElementSibling.textContent = '<div><span>0<span></div>'
+        secondCounter.firstElementChild.textContent = 0
+        ElementObserver.observe(secondCounter, (mutations, element) => {
+          element.nextElementSibling.textContent = `element value changed to "${element.textContent}"`
+        })
+        setInterval(() => {
+          secondCounter.firstElementChild.textContent = parseInt(secondCounter.textContent) + 1
+          secondCounter.previousElementSibling.textContent = `<div><span>${secondCounter.textContent}</span></div>`
+        }, 1000)
+
+        // await new Promise(resolve => setTimeout(resolve, 1000))
+
+        /* third counter */
+        const thirdCounter = counters[2]
+        thirdCounter.previousElementSibling.textContent = '<div><span>0<span></div>'
+        thirdCounter.firstElementChild.textContent = 0
+        ElementObserver.observe(thirdCounter, (mutations, element) => {
+          element.nextElementSibling.textContent = `callback : element value changed to "${element.textContent}"`
+          console.log(mutations)
+        }, true)
+        setInterval(() => {
+          thirdCounter.firstElementChild.textContent = parseInt(thirdCounter.textContent) + 1
+          thirdCounter.previousElementSibling.textContent = `<div><span>${thirdCounter.textContent}</span></div>`
+        }, 1000)
+      }
+    </script>
+  </body>
+</html>

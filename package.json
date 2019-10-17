@@ -1,0 +1,20 @@
+{
+  "name": "element-observer",
+  "version": "1.0.1",
+  "description": "Element similar to MutationObserver but more easy to use.",
+  "main": "element-observer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vdegenne/element-observer.git"
+  },
+  "keywords": ["observer"],
+  "author": "Valentin Degenne",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vdegenne/element-observer/issues"
+  },
+  "homepage": "https://github.com/vdegenne/element-observer#readme"
+}
