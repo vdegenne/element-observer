@@ -25,7 +25,7 @@ const ElementObserver = Object.assign({ CHILD_LIST: 1, CHARACTER_DATA: 2, observ
         if (!callback) {
             throw new Error('no callback');
         }
-        console.log(element, callback, type, subtree);
+        // console.log(element, callback, type, subtree)
         const observer = new MutationObserver(mutations => {
             callback(mutations, element);
         });
