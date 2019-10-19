@@ -36,7 +36,7 @@ const ElementObserver: ElementObserver = {
       throw new Error('no callback')
     }
 
-    console.log(element, callback, type, subtree)
+    // console.log(element, callback, type, subtree)
     const observer = new MutationObserver(mutations => {
       callback(mutations, element)
     })
