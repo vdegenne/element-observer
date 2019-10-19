@@ -7,12 +7,7 @@ interface ElementObserver {
 const ElementObserver: ElementObserver = {
   CHILD_LIST: 1,
   CHARACTER_DATA: 2,
-  observe: function(
-    element: HTMLElement,
-    type: number | string = ElementObserver.CHILD_LIST,
-    callback: Function,
-    subtree: number | boolean = ElementObserver.CHILD_LIST
-  ) {
+  observe: function(element: HTMLElement, type: number | string = ElementObserver.CHILD_LIST, callback: Function, subtree: boolean = false) {
     if (!element || element.nodeType !== 1) {
       throw new Error('element is no valid')
     }
@@ -21,7 +16,7 @@ const ElementObserver: ElementObserver = {
       callback = type
       type = this.CHILD_LIST
       if (_callback) {
-        subtree = <number | boolean>(<unknown>_callback)
+        subtree = <boolean>(<unknown>_callback)
       }
     }
     if (typeof type === 'string') {
