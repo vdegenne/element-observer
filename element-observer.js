@@ -1,4 +1,4 @@
-const ElementObserver = Object.assign({ CHILD_LIST: 1, CHARACTER_DATA: 2, observe: function (element, type = ElementObserver.CHILD_LIST, callback, subtree = false) {
+const ElementObserver = Object.assign({ CHILD_LIST: 1, CHARACTER_DATA: 2, observe: function (element, type = ElementObserver.CHILD_LIST, callback, subtree = ElementObserver.CHARACTER_DATA) {
         if (!element || element.nodeType !== 1) {
             throw new Error('element is no valid');
         }
