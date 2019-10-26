@@ -1,6 +1,6 @@
 {
   "name": "element-observer",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Element similar to MutationObserver but more easy to use.",
   "main": "element-observer.js",
   "scripts": {
