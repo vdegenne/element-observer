@@ -1,10 +1,10 @@
 interface ElementObserver {
   CHILD_LIST: 1
   CHARACTER_DATA: 2
-  observe: Function
+  observe: ((element:HTMLElement, type:number|string, callback:Function, subtree?:boolean|number) => MutationObserver) | ((element:HTMLElement, callback:Function, subtree?:boolean|number) => MutationObserver)
 }
 
-const ElementObserver: ElementObserver = {
+export const ElementObserver: ElementObserver = {
   CHILD_LIST: 1,
   CHARACTER_DATA: 2,
   observe: function(
@@ -55,8 +55,3 @@ const ElementObserver: ElementObserver = {
   },
   ...MutationObserver
 }
-
-// @ts-ignore
-window.ElementObserver = ElementObserver
-
-export { ElementObserver }
