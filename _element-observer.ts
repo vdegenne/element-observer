@@ -1,8 +1,9 @@
 interface ElementObserver {
   CHILD_LIST: 1
   CHARACTER_DATA: 2
-  observe: ((element:HTMLElement, type:number|string|undefined, callback:Function, subtree?:boolean|number) => MutationObserver)
+  observe: ((element:HTMLElement, type:number|string|undefined, callback:(mutations: MutationRecord[], element: HTMLElement) => void, subtree?:boolean|number) => MutationObserver)
 }
+
 
 export const ElementObserver: ElementObserver = {
   CHILD_LIST: 1,
